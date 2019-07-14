@@ -34,7 +34,8 @@ import com.jess.arms.http.imageloader.ImageLoader;
  * ================================================
  */
 public class ImageConfigImpl extends ImageConfig {
-    private @CacheStrategy.Strategy int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
+    private @CacheStrategy.Strategy
+    int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
     private int fallback; //请求 url 为空,则使用此图片作为占位符
     private int imageRadius;//图片每个圆角的大小
     private int blurValue;//高斯模糊值, 值越大模糊效果越大
@@ -53,8 +54,8 @@ public class ImageConfigImpl extends ImageConfig {
     private ImageConfigImpl(Builder builder) {
         this.url = builder.url;
         this.imageView = builder.imageView;
-        this.placeholder = builder.placeholder;
-        this.errorPic = builder.errorPic;
+        this.placeholder = (builder.placeholder);
+        this.errorPic = (builder.errorPic);
         this.fallback = builder.fallback;
         this.cacheStrategy = builder.cacheStrategy;
         this.imageRadius = builder.imageRadius;
@@ -68,7 +69,8 @@ public class ImageConfigImpl extends ImageConfig {
         this.isClearDiskCache = builder.isClearDiskCache;
     }
 
-    public @CacheStrategy.Strategy int getCacheStrategy() {
+    public @CacheStrategy.Strategy
+    int getCacheStrategy() {
         return cacheStrategy;
     }
 
@@ -130,7 +132,8 @@ public class ImageConfigImpl extends ImageConfig {
         private int placeholder;
         private int errorPic;
         private int fallback; //请求 url 为空,则使用此图片作为占位符
-        private @CacheStrategy.Strategy int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
+        private @CacheStrategy.Strategy
+        int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
         private int imageRadius;//图片每个圆角的大小
         private int blurValue;//高斯模糊值, 值越大模糊效果越大
         /**

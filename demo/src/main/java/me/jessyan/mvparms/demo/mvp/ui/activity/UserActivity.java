@@ -32,7 +32,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import me.jessyan.mvparms.demo.R;
 import me.jessyan.mvparms.demo.di.component.DaggerUserComponent;
 import me.jessyan.mvparms.demo.mvp.contract.UserContract;
@@ -54,10 +53,10 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+//    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+//    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
     @Inject
     RxPermissions mRxPermissions;
     @Inject
@@ -85,8 +84,10 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        recyclerView = findViewById(R.id.recyclerView);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         initRecyclerView();
-        mRecyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);
         initPaginate();
     }
 
@@ -100,21 +101,21 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
      * 初始化RecyclerView
      */
     private void initRecyclerView() {
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        ArmsUtils.configRecyclerView(mRecyclerView, mLayoutManager);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        ArmsUtils.configRecyclerView(recyclerView, mLayoutManager);
     }
 
 
     @Override
     public void showLoading() {
         Timber.tag(TAG).w("showLoading");
-        mSwipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
         Timber.tag(TAG).w("hideLoading");
-        mSwipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -182,7 +183,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
                 }
             };
 
-            mPaginate = Paginate.with(mRecyclerView, callbacks)
+            mPaginate = Paginate.with(recyclerView, callbacks)
                     .setLoadingTriggerThreshold(0)
                     .build();
             mPaginate.setHasMoreDataToLoad(false);
@@ -191,7 +192,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
 
     @Override
     protected void onDestroy() {
-        DefaultAdapter.releaseAllHolder(mRecyclerView);//super.onDestroy()之后会unbind,所有view被置为null,所以必须在之前调用
+        DefaultAdapter.releaseAllHolder(recyclerView);//super.onDestroy()之后会unbind,所有view被置为null,所以必须在之前调用
         super.onDestroy();
         this.mRxPermissions = null;
         this.mPaginate = null;

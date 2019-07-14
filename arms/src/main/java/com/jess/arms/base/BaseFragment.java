@@ -64,7 +64,7 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Override
     public synchronized Cache<String, Object> provideCache() {
         if (mCache == null) {
-            mCache = ArmsUtils.obtainAppComponentFromContext(getActivity()).cacheFactory().build(CacheType.FRAGMENT_CACHE);
+            mCache = ArmsUtils.obtainAppComponentFromContext(getActivity()).cacheFactory().build(CacheType.Companion.getFRAGMENT_CACHE());
         }
         return mCache;
     }

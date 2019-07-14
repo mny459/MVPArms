@@ -18,6 +18,7 @@ package me.jessyan.mvparms.demo.app;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.integration.cache.IntelligentCache;
@@ -25,7 +26,6 @@ import com.jess.arms.utils.ArmsUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
-import butterknife.ButterKnife;
 import me.jessyan.mvparms.demo.BuildConfig;
 import timber.log.Timber;
 
@@ -42,7 +42,7 @@ public class AppLifecyclesImpl implements AppLifecycles {
 
     @Override
     public void attachBaseContext(@NonNull Context base) {
-//          MultiDex.install(base);  //这里比 onCreate 先执行,常用于 MultiDex 初始化,插件化框架的初始化
+          MultiDex.install(base);  //这里比 onCreate 先执行,常用于 MultiDex 初始化,插件化框架的初始化
     }
 
     @Override
@@ -65,7 +65,6 @@ public class AppLifecyclesImpl implements AppLifecycles {
 //                            Logger.log(priority, tag, message, t);
 //                        }
 //                    });
-            ButterKnife.setDebug(true);
         }
         //LeakCanary 内存泄露检查
         //使用 IntelligentCache.KEY_KEEP 作为 key 的前缀, 可以使储存的数据永久存储在内存中

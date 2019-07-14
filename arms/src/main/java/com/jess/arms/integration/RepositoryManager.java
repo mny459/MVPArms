@@ -19,19 +19,23 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.utils.Preconditions;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import dagger.Lazy;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.rx_cache2.internal.RxCache;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import retrofit2.Retrofit;
 
 /**
@@ -130,7 +134,7 @@ public class RepositoryManager implements IRepositoryManager {
      */
     private <T> T getRetrofitService(Class<T> serviceClass) {
         if (mRetrofitServiceCache == null) {
-            mRetrofitServiceCache = mCachefactory.build(CacheType.RETROFIT_SERVICE_CACHE);
+            mRetrofitServiceCache = mCachefactory.build(CacheType.Companion.getRETROFIT_SERVICE_CACHE());
         }
         Preconditions.checkNotNull(mRetrofitServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");
@@ -158,7 +162,7 @@ public class RepositoryManager implements IRepositoryManager {
     public synchronized <T> T obtainCacheService(@NonNull Class<T> cacheClass) {
         Preconditions.checkNotNull(cacheClass, "cacheClass == null");
         if (mCacheServiceCache == null) {
-            mCacheServiceCache = mCachefactory.build(CacheType.CACHE_SERVICE_CACHE);
+            mCacheServiceCache = mCachefactory.build(CacheType.Companion.getCACHE_SERVICE_CACHE());
         }
         Preconditions.checkNotNull(mCacheServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");
