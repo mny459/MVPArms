@@ -21,7 +21,7 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 
-import com.jess.arms.base.delegate.AppLifecycles
+import com.mny.pango.base.delegate.AppLifecycle
 import com.jess.arms.di.module.GlobalConfigModule
 
 /**
@@ -44,12 +44,12 @@ interface ConfigModule {
     fun applyOptions(context: Context, builder: GlobalConfigModule.Builder)
 
     /**
-     * 使用 [AppLifecycles] 在 [Application] 的生命周期中注入一些操作
+     * 使用 [AppLifecycle] 在 [Application] 的生命周期中注入一些操作
      *
      * @param context    [Context]
      * @param lifecycles [Application] 的生命周期容器, 可向框架中添加多个 [Application] 的生命周期类
      */
-    fun injectAppLifecycle(context: Context, lifecycles: MutableList< AppLifecycles>)
+    fun injectAppLifecycle(context: Context, lifecycles: MutableList<AppLifecycle>)
 
     /**
      * 使用 [Application.ActivityLifecycleCallbacks] 在 [Activity] 的生命周期中注入一些操作

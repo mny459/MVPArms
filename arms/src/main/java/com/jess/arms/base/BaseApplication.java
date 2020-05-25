@@ -20,7 +20,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jess.arms.base.delegate.AppDelegate;
-import com.jess.arms.base.delegate.AppLifecycles;
+import com.mny.pango.base.delegate.AppLifecycle;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.Preconditions;
@@ -41,7 +41,7 @@ import com.jess.arms.utils.Preconditions;
  * ================================================
  */
 public class BaseApplication extends Application implements App {
-    private AppLifecycles mAppDelegate;
+    private AppLifecycle mAppDelegate;
 
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化

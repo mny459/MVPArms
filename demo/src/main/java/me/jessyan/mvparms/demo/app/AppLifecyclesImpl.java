@@ -20,7 +20,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
-import com.jess.arms.base.delegate.AppLifecycles;
+import com.blankj.utilcode.util.Utils;
+import com.mny.pango.base.delegate.AppLifecycle;
 import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.utils.ArmsUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -31,18 +32,18 @@ import timber.log.Timber;
 
 /**
  * ================================================
- * 展示 {@link AppLifecycles} 的用法
+ * 展示 {@link AppLifecycle} 的用法
  * <p>
  * Created by JessYan on 04/09/2017 17:12
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class AppLifecyclesImpl implements AppLifecycles {
+public class AppLifecyclesImpl implements AppLifecycle {
 
     @Override
     public void attachBaseContext(@NonNull Context base) {
-          MultiDex.install(base);  //这里比 onCreate 先执行,常用于 MultiDex 初始化,插件化框架的初始化
+        MultiDex.install(base);  //这里比 onCreate 先执行,常用于 MultiDex 初始化,插件化框架的初始化
     }
 
     @Override
@@ -66,6 +67,7 @@ public class AppLifecyclesImpl implements AppLifecycles {
 //                        }
 //                    });
         }
+        Utils.init(application);
         //LeakCanary 内存泄露检查
         //使用 IntelligentCache.KEY_KEEP 作为 key 的前缀, 可以使储存的数据永久存储在内存中
         //否则存储在 LRU 算法的存储空间中, 前提是 extras 使用的是 IntelligentCache (框架默认使用)

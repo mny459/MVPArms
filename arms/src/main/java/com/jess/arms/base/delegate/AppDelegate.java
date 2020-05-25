@@ -35,6 +35,7 @@ import com.jess.arms.integration.ManifestParser;
 import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.Preconditions;
+import com.mny.pango.base.delegate.AppLifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ import javax.inject.Named;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class AppDelegate implements App, AppLifecycles {
+public class AppDelegate implements App, AppLifecycle {
     private Application mApplication;
     private AppComponent mAppComponent;
     @Inject
@@ -66,7 +67,7 @@ public class AppDelegate implements App, AppLifecycles {
     @Named("ActivityLifecycleForRxLifecycle")
     protected Application.ActivityLifecycleCallbacks mActivityLifecycleForRxLifecycle;
     private List<ConfigModule> mModules;
-    private List<AppLifecycles> mAppLifecycles = new ArrayList<>();
+    private List<com.mny.pango.base.delegate.AppLifecycle> mAppLifecycles = new ArrayList<>();
     private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
     private ComponentCallbacks2 mComponentCallback;
 
@@ -90,7 +91,7 @@ public class AppDelegate implements App, AppLifecycles {
     public void attachBaseContext(@NonNull Context base) {
 
         //遍历 mAppLifecycles, 执行所有已注册的 AppLifecycles 的 attachBaseContext() 方法 (框架外部, 开发者扩展的逻辑)
-        for (AppLifecycles lifecycle : mAppLifecycles) {
+        for (com.mny.pango.base.delegate.AppLifecycle lifecycle : mAppLifecycles) {
             lifecycle.attachBaseContext(base);
         }
     }
@@ -132,7 +133,7 @@ public class AppDelegate implements App, AppLifecycles {
         mApplication.registerComponentCallbacks(mComponentCallback);
 
         //执行框架外部, 开发者扩展的 App onCreate 逻辑
-        for (AppLifecycles lifecycle : mAppLifecycles) {
+        for (com.mny.pango.base.delegate.AppLifecycle lifecycle : mAppLifecycles) {
             lifecycle.onCreate(mApplication);
         }
     }
@@ -154,7 +155,7 @@ public class AppDelegate implements App, AppLifecycles {
             }
         }
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (AppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycle lifecycle : mAppLifecycles) {
                 lifecycle.onTerminate(mApplication);
             }
         }

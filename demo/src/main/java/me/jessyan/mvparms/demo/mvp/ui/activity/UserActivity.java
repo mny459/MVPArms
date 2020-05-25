@@ -16,6 +16,9 @@
 package me.jessyan.mvparms.demo.mvp.ui.activity;
 
 import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +26,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
@@ -53,9 +57,9 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-//    @BindView(R.id.recyclerView)
+    //    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-//    @BindView(R.id.swipeRefreshLayout)
+    //    @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @Inject
     RxPermissions mRxPermissions;
@@ -89,8 +93,20 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
         initRecyclerView();
         recyclerView.setAdapter(mAdapter);
         initPaginate();
+        getLifecycle().addObserver(new LifecycleObserver() {
+            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            void onResume() {
+                LogUtils.d("======");
+            }
+        });
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d("onResume");
+    }
 
     @Override
     public void onRefresh() {

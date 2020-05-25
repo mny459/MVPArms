@@ -26,7 +26,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import com.jess.arms.base.delegate.AppLifecycles;
+import com.mny.pango.base.delegate.AppLifecycle;
 import com.jess.arms.utils.ArmsUtils;
 
 import java.util.Arrays;
@@ -117,7 +117,7 @@ public final class AppManager {
      * <p>
      * 提供给外部扩展 {@link AppManager} 的 {@link #onReceive} 方法(远程遥控 {@link AppManager} 的功能)
      * 建议在 {@link ConfigModule#injectAppLifecycle(Context, List)} 中
-     * 通过 {@link AppLifecycles#onCreate(Application)} 在 App 初始化时,使用此方法传入自定义的 {@link HandleListener}
+     * 通过 {@link AppLifecycle#onCreate(Application)} 在 App 初始化时,使用此方法传入自定义的 {@link HandleListener}
      *
      * @param handleListener
      */
