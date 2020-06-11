@@ -1,4 +1,3 @@
-include ':arms'
-//include ':arms-autolayout', ':arms-imageloader-glide'
+include ':pango'
 include ':demo'
 includeBuild('version_config')

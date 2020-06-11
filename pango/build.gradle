@@ -1,0 +1,80 @@
+import com.mny.version.Config
+
+plugins {
+    id "com.mny.version"
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'koin'
+
+android {
+    compileSdkVersion Config.BuildConfig.compileSdkVersion
+    buildToolsVersion Config.BuildConfig.buildToolsVersion
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion Config.BuildConfig.minSdkVersion
+        targetSdkVersion Config.BuildConfig.targetSdkVersion
+        versionCode Config.BuildConfig.versionCode
+        versionName Config.BuildConfig.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    api(Config.AndroidX.appcompat)
+    api(Config.AndroidX.coreKtx)
+    api(Config.AndroidX.recyclerView)
+    api(Config.AndroidX.constraintlayout)
+    api(Config.AndroidX.multidex)
+
+    api(Config.AndroidX.Lifecycle.lifecycleRuntime)
+    api(Config.AndroidX.Lifecycle.viewModel)
+    api(Config.AndroidX.Lifecycle.viewModelKtx)
+    api(Config.AndroidX.Lifecycle.liveData)
+    api(Config.AndroidX.Lifecycle.liveDataKtx)
+
+    api(Config.Jetbrains.kotlin)
+    api(Config.Jetbrains.anko)
+
+    //network
+    api(Config.ThirdParty.Network.retrofit) {
+        exclude module: 'okhttp'
+        exclude module: 'okio'
+    }
+    implementation(Config.ThirdParty.Network.gsonConverter) {
+        exclude module: 'gson'
+        exclude module: 'okhttp'
+        exclude module: 'okio'
+        exclude module: 'retrofit'
+    }
+
+    api(Config.ThirdParty.Network.okHttp4)
+
+    api(Config.ThirdParty.Google.gson)
+    api(Config.ThirdParty.Glide.glide)
+    kapt(Config.ThirdParty.Glide.compiler) {
+        exclude module: 'jsr305'
+    }
+    api(Config.ThirdParty.auc)
+
+    api(Config.ThirdParty.Koin.androidXScope)
+    api(Config.ThirdParty.Koin.viewModel)
+    api(Config.ThirdParty.Koin.fragment)
+    api(Config.ThirdParty.Koin.ext)
+}

@@ -31,7 +31,7 @@ gradlePlugin {
     plugins {
         version {
             id = 'com.mny.version'
-            implementationClass = 'com.mny.version_config.VersionConfigPlugin'
+            implementationClass = 'com.mny.version.VersionConfigPlugin'
         }
     }
 }
