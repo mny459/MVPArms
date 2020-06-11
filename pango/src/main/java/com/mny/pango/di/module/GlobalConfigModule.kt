@@ -27,7 +27,7 @@ class GlobalConfigModule internal constructor(builder: Builder) {
     fun provideLogInterceptor(): Interceptor = mLogInterceptor
     fun provideHttpUrl(): HttpUrl = mHttpUrl
     class Builder {
-        internal var httpUrl: HttpUrl = "https://www.github.com".toHttpUrl()
+        internal var httpUrl: HttpUrl = "https://api.github.com".toHttpUrl()
         internal var executorService: ExecutorService = ThreadPoolExecutor(0,
                 Int.MAX_VALUE,
                 60,

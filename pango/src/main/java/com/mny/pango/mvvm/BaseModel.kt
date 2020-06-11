@@ -13,7 +13,7 @@ import org.koin.core.inject
  *        Desc:
  */
 abstract class BaseModel() : LifecycleObserver, KoinComponent {
-    val mRepository: IRepository? by inject()
+    val mRepository: IRepository by inject()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {

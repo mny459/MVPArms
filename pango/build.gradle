@@ -50,7 +50,10 @@ dependencies {
     api(Config.AndroidX.Lifecycle.liveDataKtx)
 
     api(Config.Jetbrains.kotlin)
+//    api(Config.Jetbrains.kotlinAndroidExtensions)
     api(Config.Jetbrains.anko)
+    api(Config.Jetbrains.coroutinesCore)
+    api(Config.Jetbrains.coroutinesAndroid)
 
     //network
     api(Config.ThirdParty.Network.retrofit) {

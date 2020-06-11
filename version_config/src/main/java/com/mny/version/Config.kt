@@ -17,6 +17,10 @@ object Config {
         private const val anko_version = "0.10.8"
         const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
         const val anko = "org.jetbrains.anko:anko:$anko_version"
+        const val kotlinAndroidExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        private const val coroutineVersion = "1.3.4"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
     }
 
     object AndroidX {
@@ -126,7 +130,8 @@ object Config {
     object ThirdParty {
         const val materialiconlib = "net.steamcrafted:materialiconlib:1.1.5"
         const val permission = "com.yanzhenjie.permission:x:2.0.1"
-        const val auc = "com.blankj:utilcode:1.24.7"
+        const val auc = "com.blankj:utilcodex:1.29.0"
+        const val brvah = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
 
         object Koin {
             const val koin_version = "2.1.5"
@@ -156,7 +161,7 @@ object Config {
         }
 
         object Network {
-            const val retrofit_version = "2.6.0"
+            const val retrofit_version = "2.9.0"
             const val retrofit = "com.squareup.retrofit2:retrofit:${retrofit_version}"
             const val gsonConverter = "com.squareup.retrofit2:converter-gson:${retrofit_version}"
             const val okHttp4 = "com.squareup.okhttp3:okhttp:4.6.0"

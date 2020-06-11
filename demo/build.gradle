@@ -1,6 +1,5 @@
 import com.mny.version.Config
 
-//apply plugin: "com.mny.version"
 plugins {
     id "com.mny.version"
 }
@@ -23,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "me.mny.pango.demo"
+        applicationId "com.mny.pango.demo"
         minSdkVersion Config.BuildConfig.minSdkVersion
         targetSdkVersion Config.BuildConfig.targetSdkVersion
         versionCode Config.BuildConfig.versionCode
@@ -58,6 +57,7 @@ dependencies {
     //arms
     implementation project(':pango')
     implementation(Config.AndroidX.cardview)
+    implementation(Config.ThirdParty.brvah)
 
     //test
     testImplementation(Config.Testing.jUnit)

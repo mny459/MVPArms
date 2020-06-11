@@ -2,6 +2,7 @@ package com.mny.pango.base
 
 import android.app.Application
 import android.content.Context
+import com.blankj.utilcode.util.Utils
 import com.mny.pango.base.delegate.AppDelegate
 import com.mny.pango.base.delegate.AppLifecycle
 
@@ -20,6 +21,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         mAppDelegate.onCreate(this)
+        Utils.init(this)
     }
 
     override fun onTerminate() {
