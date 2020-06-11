@@ -1,7 +1,7 @@
 package com.mny.pango.demo.mvvm.model.api
 
+import com.mny.pango.demo.mvvm.model.User
 import io.reactivex.Observable
-import me.jessyan.mvparms.demo.mvp.model.entity.User
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
